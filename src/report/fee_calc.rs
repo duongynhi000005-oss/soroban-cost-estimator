@@ -217,6 +217,7 @@ pub fn compute_fee_breakdown(
 /// Calculate `units * rate / divisor` without narrowing the unit count or
 /// overflowing intermediate arithmetic. The final fee is clamped to the
 /// representable stroop range.
+#[must_use]
 fn scaled_fee(units: u64, rate: i64, divisor: i128) -> i64 {
     let fee = i128::from(units).saturating_mul(i128::from(rate)) / divisor;
     match i64::try_from(fee) {
